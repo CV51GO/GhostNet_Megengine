@@ -19,3 +19,21 @@ pip install -r requirements.txt
 `compare.py`文件对官方实现和Megengine实现的推理结果进行了对比。
 
 运行`compare.py`时，会读取`./data`中存放的图片进行推理。`compare.py`中实现了Megengine框架和官方使用的Pytorch框架的推理，并判断两者推理结果的一致性。
+
+## 模型加载示例
+
+在model.py中，定义了```get_Megengine_ghostnet_model```方法，该方法能够利用hub加载模型。
+```python
+@hub.pretrained(
+"https://studio.brainpp.com/api/v1/activities/3/missions/77/files/b5dab1b3-a56b-4739-82ae-d11e2eaafa7c"
+)
+def get_Megengine_ghostnet_model():
+    model_megengine = ghostnet()
+    return model_megengine
+```
+
+在使用模型时，使用如下代码即可加载权重：
+```python
+from model import get_Megengine_ghostnet_model 
+megengine_model = get_Megengine_ghostnet_model(pretrained=True)
+```
